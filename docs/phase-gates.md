@@ -10,8 +10,8 @@ Every milestone in the **Autonomous Agentic AI Home Guard** development lifecycl
 
 | Phase | Phase Name | Primary Objective | Gate Status |
 | :---: | :--- | :--- | :---: |
-| **0** | **Engineering Foundation & Agent Guardrails** | Minimal reproducible environment, strict guardrails, health baseline | **ACTIVE / READY FOR AUDIT** |
-| **1** | **Synthetic Camera & Frame Ingestion Engine** | Video generation, synthetic feeds, frame buffering | *Locked (Awaiting Approval)* |
+| **0** | **Engineering Foundation & Agent Guardrails** | Minimal reproducible environment, strict guardrails, health baseline | **COMPLETED & VERIFIED** |
+| **1** | **Synthetic Camera & Frame Ingestion Engine** | Video generation, synthetic feeds, frame buffering | *Locked (Awaiting User Authorization)* |
 | **2** | **Object Detection & Multi-Object Tracking** | CPU YOLO inference, ByteTrack persistence, trajectory vectors | *Locked* |
 | **3** | **Behavioral Classifier & Event Pipeline** | Spatial-temporal heuristics, security event schemas, async bus | *Locked* |
 | **4** | **Agent Reasoning & Incident Synthesis** | LangGraph state loop, local Ollama LLM threat assessment | *Locked* |
@@ -31,19 +31,25 @@ Every milestone in the **Autonomous Agentic AI Home Guard** development lifecycl
   - Master specs: `PROJECT_SPEC.md`, `docs/`.
   - Minimal typed health status module: `src/home_guard/health.py`.
   - Unit tests: `tests/test_health.py`.
-- **Exit Criteria**:
-  - [x] Repository inspected; existing user work preserved.
-  - [x] Package installs into `.venv` in editable mode without error.
-  - [x] Pytest passes 100% on unit tests.
-  - [x] Ruff check passes with 0 lint violations.
-  - [x] Ruff format passes check mode with 0 formatting discrepancies.
-  - [x] Mypy passes in strict mode with 0 type errors.
-  - [x] Zero Git commands executed by agent.
-  - [x] User explicitly reviews and authorizes Phase 1 kickoff.
+- **Exit Criteria (All Verified)**:
+  - [x] 1. Repository inspected; existing user work preserved.
+  - [x] 2. Operational guardrails (`AGENTS.md`) and persistent memory (`AGENT_MEMORY.md`) active.
+  - [x] 3. Clean `pyproject.toml` with pytest, Ruff, and Mypy configured.
+  - [x] 4. Virtual environment (`.venv`) established with verified dependency installation.
+  - [x] 5. Minimal testable health module (`src/home_guard/health.py`) implemented with strict typing.
+  - [x] 6. Unit tests (`tests/test_health.py`) pass 100%.
+  - [x] 7. Ruff linting and formatting checks pass with 0 errors.
+  - [x] 8. Mypy strict type checks pass with 0 errors.
+  - [x] 9. `.gitignore` and `.env.example` prevent secret leaks and repository pollution.
+  - [x] 10. Zero Git commands executed by agent.
+  - [x] 11. Verification commands documented for Windows PowerShell.
 
 ---
 
 ### Phase 1: Synthetic Camera & Frame Ingestion Engine
+- **Gate Status**: LOCKED (Awaiting User Authorization)
+- **Entry Prerequisite**:
+  - [ ] Explicit user review and authorization to begin Phase 1.
 - **Objective**: Provide a deterministic simulation feed that generates or reads recorded video streams without requiring real cameras.
 - **Exit Criteria**:
   - Synthetic video generator produces test frames with simulated objects (cars, pedestrians, packages).

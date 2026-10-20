@@ -3,7 +3,7 @@
 ## 1. Project Purpose & Current Status
 - **Project**: Autonomous Agentic AI Home Guard (`Protect`)
 - **Purpose**: A simulation-first, autonomous intelligent home security system operating without requiring physical smart-home hardware, physical cameras, or a dedicated GPU.
-- **Current Status**: **Phase 0 (Engineering Foundation & Agent Guardrails)** in progress / nearing completion.
+- **Current Status**: **Phase 0 (Engineering Foundation & Agent Guardrails)** completed and verified. Agentic configuration in `.agents/` established.
 
 ---
 
@@ -13,12 +13,14 @@
 - **Deterministic Policy Safety Net**: Probabilistic LLM decisions cannot execute actions directly; all proposed actions must pass an independent, deterministic policy validator.
 - **No Speculative Dependencies**: Foundation uses pure Python standard library for core domain logic and health checks in Phase 0. Future frameworks (FastAPI, OpenCV, LangGraph, etc.) are introduced strictly in their designated phases.
 - **Package Layout**: Standard `src/home_guard` layout using `pyproject.toml` (PEP 621 / PEP 517).
+- **Agent System**: Lean root `AGENTS.md` with modular on-demand rules in `.agents/rules/` and operational runbooks in `.agents/workflows/`.
 
 ---
 
-## 3. Current Phase & Acceptance Criteria
-- **Phase**: **Phase 0 — Engineering Foundation & Agent Guardrails**
-- **Criteria**:
+## 3. Active Phase Status & Acceptance Criteria
+- **Phase 0 Status**: **COMPLETED & VERIFIED** (Committed in `620f9fd`)
+- **Phase 1 Status**: **LOCKED / PENDING USER AUTHORIZATION**
+- **Canonical Phase 0 Verified Criteria** (Synchronized with `docs/phase-gates.md`):
   1. Repository inspected, user work preserved.
   2. Guardrails (`AGENTS.md`) and persistent memory (`AGENT_MEMORY.md`) active.
   3. Clean `pyproject.toml` with pytest, Ruff, and Mypy configured.
@@ -43,6 +45,15 @@ Protect/
 ├── pyproject.toml             # Build system, dependencies, and tool configs
 ├── .gitignore                 # Artifact, cache, and secret exclusions
 ├── .env.example               # Non-sensitive configuration template
+├── .agents/                   # Agentic operational system
+│   ├── README.md              # Agent architecture and retrieval guide
+│   ├── rules/                 # Modular on-demand rules
+│   │   ├── implementation.md  # Code standards, types, and dependencies
+│   │   ├── verification.md    # Testing, linting, and evidence requirements
+│   │   └── security.md        # Safety boundaries and secret hygiene
+│   └── workflows/             # Procedural runbooks
+│       ├── implement.md       # Standard 4-step implementation workflow
+│       └── phase-gate.md      # Phase gate audit and handoff workflow
 ├── docs/
 │   ├── architecture.md        # Subsystem boundaries and data flow
 │   ├── development.md         # Windows PowerShell setup and test workflow
@@ -69,7 +80,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e ".[dev]"
 
 # Run tests
-.\.venv\Scripts\pytest.exe
+.\.venv\Scripts\pytest.exe -v
 
 # Check code formatting
 .\.venv\Scripts\ruff.exe format --check .
@@ -90,7 +101,6 @@ python -m venv .venv
 ---
 
 ## 7. Next Authorized Task
-- Complete Phase 0 verification and present the Phase 0 report.
 - **Awaiting User Approval** before starting Phase 1 (Synthetic Camera & Frame Ingestion Engine).
 
 ---

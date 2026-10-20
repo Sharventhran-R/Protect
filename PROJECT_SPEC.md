@@ -58,18 +58,18 @@ The system processes continuous visual observations and transforms them through 
 
 | Component | Architecture Role | Target Phase | Status |
 | :--- | :--- | :--- | :--- |
-| **Foundation & Health** | Package bootstrap, health check, developer tooling | Phase 0 | **IMPLEMENTED** |
-| **Synthetic Feeds** | Camera simulation, video ingestion, mock RTSP/files | Phase 1 | Planned |
-| **Perception Engine** | Frame pre-processing, object detection (YOLO) | Phase 2 | Planned |
-| **Object Tracking** | Multi-object tracking (ByteTrack), trajectory analysis | Phase 2 | Planned |
-| **Behavior Classifier** | Loitering, perimeter breach, forced entry classification | Phase 3 | Planned |
-| **Event Pipeline** | Asynchronous event broker, structured schemas | Phase 3 | Planned |
-| **LangGraph Agent** | Contextual multi-step reasoning, incident correlation | Phase 4 | Planned |
-| **Local LLM Engine** | Ollama integration (Qwen2.5 / Llama 3.2 lightweight) | Phase 4 | Planned |
-| **Policy Engine** | Deterministic rule-based action authorization gate | Phase 5 | Planned |
-| **Action Dispatcher** | Mocked actuator triggers, sound alarms, notifications | Phase 5 | Planned |
-| **Operator Dashboard** | Real-time web UI (Vite, React, Tailwind CSS) | Phase 6 | Planned |
-| **Observability** | Metrics, telemetry, incident audit replay | Phase 7 | Planned |
+| **Foundation & Health** | Package bootstrap, health check, developer tooling | Phase 0: Engineering Foundation & Agent Guardrails | **IMPLEMENTED** |
+| **Synthetic Feeds** | Camera simulation, video ingestion, mock RTSP/files | Phase 1: Synthetic Camera & Frame Ingestion Engine | Planned |
+| **Perception Engine** | Frame pre-processing, object detection (YOLO) | Phase 2: Object Detection & Multi-Object Tracking | Planned |
+| **Object Tracking** | Multi-object tracking (ByteTrack), trajectory analysis | Phase 2: Object Detection & Multi-Object Tracking | Planned |
+| **Behavior Classifier** | Loitering, perimeter breach, forced entry classification | Phase 3: Behavioral Classifier & Event Pipeline | Planned |
+| **Event Pipeline** | Asynchronous event broker, structured schemas | Phase 3: Behavioral Classifier & Event Pipeline | Planned |
+| **LangGraph Agent** | Contextual multi-step reasoning, incident correlation | Phase 4: Agent Reasoning & Incident Synthesis | Planned |
+| **Local LLM Engine** | Ollama integration (Qwen2.5 / Llama 3.2 lightweight) | Phase 4: Agent Reasoning & Incident Synthesis | Planned |
+| **Policy Engine** | Deterministic rule-based action authorization gate | Phase 5: Deterministic Policy Engine & Action Dispatch | Planned |
+| **Action Dispatcher** | Mocked actuator triggers, sound alarms, notifications | Phase 5: Deterministic Policy Engine & Action Dispatch | Planned |
+| **Operator Dashboard** | Real-time web UI (Vite, React, Tailwind CSS) | Phase 6: Operator Dashboard & Incident Playback | Planned |
+| **Observability** | Metrics, telemetry, incident audit replay | Phase 7: System Hardening & Observability | Planned |
 
 ---
 

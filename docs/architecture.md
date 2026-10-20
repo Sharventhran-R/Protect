@@ -45,6 +45,19 @@ The architecture is partitioned into six decoupled subsystems:
   └── Incident History & Video Evidence Storage
 ```
 
+### Runtime Tier to Implementation Phase Mapping
+
+| Architectural Subsystem | Primary Implementation Phase | Phase Scope Boundary |
+| :--- | :--- | :--- |
+| **Tier 1: Ingestion** | **Phase 1: Synthetic Camera & Frame Ingestion Engine** | Synthetic generator, file feeds, frame buffering (NO YOLO) |
+| **Tier 1: Perception** | **Phase 2: Object Detection & Multi-Object Tracking** | CPU YOLO detector, bounding box generation |
+| **Tier 2: Tracking** | **Phase 2: Object Detection & Multi-Object Tracking** | ByteTrack IDs, trajectory vectors, dwell time |
+| **Tier 2: Behavior** | **Phase 3: Behavioral Classifier & Event Pipeline** | Heuristic & scikit-learn anomaly classifiers |
+| **Tier 3: Event Broker** | **Phase 3: Behavioral Classifier & Event Pipeline** | Pydantic event schemas, async event bus |
+| **Tier 4: Agent Reasoning** | **Phase 4: Agent Reasoning & Incident Synthesis** | LangGraph state loop, local Ollama LLM integration |
+| **Tier 5: Policy Validator** | **Phase 5: Deterministic Policy Engine & Action Dispatch** | Deterministic safety gate, authorization rules |
+| **Tier 6: Action & UI** | **Phase 5 (Actions) & Phase 6 (Dashboard)** | Mocked actuators, Vite/React incident dashboard |
+
 ---
 
 ## 2. Subsystem Responsibilities
