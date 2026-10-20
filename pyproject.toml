@@ -21,7 +21,10 @@ classifiers = [
     "Intended Audience :: Developers",
     "Topic :: Security",
 ]
-dependencies = []
+dependencies = [
+    "numpy>=2.0.0",
+    "opencv-python>=4.10.0",
+]
 
 [project.optional-dependencies]
 dev = [
@@ -72,3 +75,7 @@ warn_return_any = true
 warn_unreachable = true
 packages = ["home_guard"]
 mypy_path = "src"
+
+[[tool.mypy.overrides]]
+module = ["cv2", "cv2.*"]
+ignore_missing_imports = true
