@@ -3,8 +3,8 @@
 ## 1. Project Purpose & Current Status
 - **Project**: Autonomous Agentic AI Home Guard (`Protect`)
 - **Purpose**: A simulation-first, autonomous intelligent home security system operating without requiring physical smart-home hardware, physical cameras, or a dedicated GPU.
-- **Current Status**: **Phase 1 (Synthetic Camera & Frame Ingestion Engine)** undergoing final robustness verification and review audit. Implementation and extended test suite in progress.
-
+- **Current Status**: **Phase 2.1 (Domain Models, Contracts & Validation)** implemented and verified offline; awaiting human review.
+ 
 ---
 
 ## 2. Confirmed Architectural Decisions
@@ -17,6 +17,11 @@
   - Deterministic CPU-only `SyntheticCameraSource` generating reproducible frames with moving geometric entities and sequence patterns without wall-clock sleep dependencies.
   - Optional `FileCameraSource` decoding local MP4/AVI files via OpenCV with graceful decoder availability checking, empty/corrupt file rejection, and resource cleanup.
   - `CameraManager` providing centralized registry, lifecycle control, and downstream consumer API (`get_next_frame`) for Phase 2.
+- **Perception Subsystem Architecture (Phase 2.1)**:
+  - Immutable, typed `BoundingBox` contract with half-open geometry `[0, width]` and `[0, height]`, strict non-negative finite coordinate validation, mathematical IoU, and edge clipping with non-intersection rejection.
+  - Immutable `Detection` observation model enforcing integer `class_id`, trimmed non-empty label, finite `confidence` in `[0.0, 1.0]`, and bounded geometry.
+  - Immutable `DetectionResult` encapsulating frame identity (reusing `FrameMetadata`), detection tuples, finite non-negative `latency_ms`, and typed `DetectionErrorDetail` failure representation.
+  - Framework-independent `ObjectDetector` and `MultiObjectTracker` protocol abstractions without runtime model dependencies.
 - **Package Layout**: Standard `src/home_guard` layout using `pyproject.toml` (PEP 621 / PEP 517).
 - **Agent System**: Lean root `AGENTS.md` with modular on-demand rules in `.agents/rules/` and operational runbooks in `.agents/workflows/`.
 
@@ -24,8 +29,26 @@
 
 ## 3. Active Phase Status & Acceptance Criteria
 - **Phase 0 Status**: **COMPLETED & VERIFIED** (Committed in `620f9fd`)
-- **Phase 1 Status**: **UNDERGOING FINAL ROBUSTNESS VERIFICATION** (Targeted code review improvements & missing test coverage being verified; pending human approval)
-- **Phase 2 Status**: **LOCKED / PENDING USER AUTHORIZATION**
+- **Phase 1 Status**: **COMPLETED & VERIFIED** (40 tests passing, awaiting final human signoff)
+- **Phase 2.1 Status**: **IMPLEMENTED (AWAITING HUMAN REVIEW)** (Zero detector/tracker implementations; contracts, validation, and 84 tests passing)
+- **Phase 2.2+ Status**: **LOCKED / PENDING USER AUTHORIZATION**
+
+### Phase 2.1 Criteria Verification Evidence Status
+1. [x] Immutable `BoundingBox` implemented with half-open geometry `[0, width]` / `[0, height]`.
+2. [x] Strict coordinate validation rejecting NaN, inf, booleans, negative, zero-area, and inverted coordinates.
+3. [x] Mathematically correct IoU implementation covering identical, disjoint, touching, overlapping, and nested boxes.
+4. [x] `clip_to_image(width, height)` validates positive dimensions and rejects non-intersecting boxes without fabricating artificial 1-pixel boxes.
+5. [x] Immutable `Detection` model validates non-negative int `class_id`, non-empty trimmed `label`, finite `confidence` in `[0.0, 1.0]`.
+6. [x] Immutable `DetectionResult` preserves frame identity via `FrameMetadata`, validates non-negative `latency_ms`, and rejects explicit identity mismatches.
+7. [x] Distinguishable successful zero-detection results vs. structured failed inference (`DetectionErrorDetail`).
+8. [x] Framework-independent protocols: `ObjectDetector`, `MultiObjectTracker`, and `TrackingResultProtocol`.
+9. [x] Zero detector, tracker, fake engine, or pipeline implementations.
+10. [x] Full test suite execution: 124 passed (4 Phase 0 + 36 Phase 1 + 84 Phase 2.1).
+11. [x] Ruff lint passes with 0 errors.
+12. [x] Ruff format passes check with 0 discrepancies (29 files formatted).
+13. [x] Mypy strict mode passes with 0 type errors across 16 source files.
+14. [x] Zero Git commands executed by agent.
+15. [x] Zero package installations, dependency changes, or model weight downloads.
 
 ### Phase 1 Criteria Verification Evidence Status
 1. [x] Camera contracts and domain models (`CameraConfig`, `FrameMetadata`, `Frame`) implemented with strict validation.
@@ -115,7 +138,7 @@ Protect/
 ---
 
 ## 7. Next Authorized Task
-- **Awaiting User Approval** before starting Phase 2 (Object Detection & Multi-Object Tracking).
+- **Awaiting Human Review and Authorization of Phase 2.1** before proceeding to Phase 2.2 (Deterministic Fake Perception & Test Fixtures).
 
 ---
 
